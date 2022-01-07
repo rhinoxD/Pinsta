@@ -13,6 +13,18 @@ router.get('/allposts', async (req, res) => {
   }
 });
 
+router.get('/myposts', requireLogin, async (req, res) => {
+  try {
+    const myPosts = await Post.find({ postedBy: req.user._id }).populate(
+      'postedBy',
+      '_id name'
+    );
+    res.json({ myPosts });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post('/createpost', requireLogin, async (req, res) => {
   const { title, body } = req.body;
   if (!title || !body) {
