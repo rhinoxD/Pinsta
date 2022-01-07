@@ -6,6 +6,9 @@ const { MONGOURI } = require('./keys');
 
 require('./models/user');
 
+app.use(express.json());
+app.use(require('./routes/auth'));
+
 mongoose.connect(MONGOURI);
 mongoose.connection.on('connected', () => {
   console.log('Connected to Mongo');
@@ -15,5 +18,5 @@ mongoose.connection.on('error', (err) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on PORT ${PORT}`);
+  console.log(`Server running on PORT ${PORT}`);
 });
