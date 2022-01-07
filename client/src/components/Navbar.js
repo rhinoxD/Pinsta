@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav>
       <div className='nav-wrapper white'>
         <Link to='/' className='brand-logo left'>
-          InstaClone
+          Instagram
         </Link>
         <ul id='nav-mobile' className='right'>
           <li>
