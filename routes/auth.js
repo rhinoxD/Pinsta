@@ -33,4 +33,27 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+router.post('/signin', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res
+        .status(422)
+        .json({ error: 'Please provide required credentials.' });
+    }
+    const savedUser = await User.findOne({ email });
+    if (!savedUser) {
+      return res.status(422).json({ error: 'Invalid Email or Password.' });
+    }
+    const doMatch = await bcrypt.compare(password, savedUser.password);
+    if (doMatch) {
+      res.json({ message: 'Signed In Successfully' });
+    } else {
+      return res.status(422).json({ error: 'Invalid Email or Password.' });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
