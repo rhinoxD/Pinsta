@@ -93,12 +93,44 @@ const Home = () => {
       });
     coms.forEach((com) => (com.value = ''));
   };
+  const deletePost = (postId) => {
+    fetch(`/deletepost/${postId}`, {
+      method: 'delete',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        const newData = data.filter((item) => {
+          return item._id !== result._id;
+        });
+        setData(newData);
+      });
+  };
   return (
     <div className='home'>
       {data.map((item) => {
         return (
           <div className='card home-card' key={item._id}>
-            <h5>{item.postedBy.name}</h5>
+            <h5>
+              {item.postedBy.name}{' '}
+              {item.postedBy._id === state.payload._id && (
+                <i
+                  className='material-icons'
+                  style={{
+                    color: 'red',
+                    float: 'right',
+                    padding: '0.2rem',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => deletePost(item._id)}
+                >
+                  delete
+                </i>
+              )}
+            </h5>
             <div className='card-image'>
               {item.likes.includes(state.payload._id) ? (
                 <img
@@ -146,6 +178,19 @@ const Home = () => {
                       <strong>{record.postedBy.name}</strong>
                     </span>{' '}
                     {record.text}
+                    {/* {item.postedBy._id === state.payload._id && (
+                      <i
+                        className='material-icons'
+                        style={{
+                          color: 'red',
+                          float: 'right',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => deletePost(item._id)}
+                      >
+                        delete
+                      </i>
+                    )} */}
                   </h6>
                 );
               })}
