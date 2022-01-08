@@ -6,7 +6,9 @@ const Post = mongoose.model('Post');
 
 router.get('/allposts', requireLogin, async (req, res) => {
   try {
-    const posts = await Post.find().populate('postedBy', '_id name');
+    const posts = await Post.find()
+      .populate('postedBy', '_id name')
+      .populate('comments.postedBy', '_id name');
     res.json({ posts });
   } catch (error) {
     console.log(error);
@@ -98,6 +100,7 @@ router.put('/comment', requireLogin, (req, res) => {
     }
   )
     .populate('comments.postedBy', '_id name')
+    .populate('postedBy', '_id name')
     .exec((error, result) => {
       if (error) {
         return res.status(422).json({ error });

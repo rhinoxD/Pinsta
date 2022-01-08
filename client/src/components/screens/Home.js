@@ -63,6 +63,36 @@ const Home = () => {
         console.log(error);
       });
   };
+  const makeComment = (text, postId) => {
+    const coms = document.querySelectorAll('.comments');
+    fetch('/comment', {
+      method: 'put',
+      headers: {
+        'Content-Type': ' application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+      },
+      body: JSON.stringify({
+        postId,
+        text,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        const newData = data.map((item) => {
+          if (item._id === result._id) {
+            return result;
+          } else {
+            return item;
+          }
+        });
+        setData(newData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    coms.forEach((com) => (com.value = ''));
+  };
   return (
     <div className='home'>
       {data.map((item) => {
@@ -109,7 +139,28 @@ const Home = () => {
               </h6>
               <h6>{item.title}</h6>
               <p>{item.body}</p>
-              <input type='text' placeholder='Add a comment' />
+              {item.comments.map((record) => {
+                return (
+                  <h6 key={record._id}>
+                    <span>
+                      <strong>{record.postedBy.name}</strong>
+                    </span>{' '}
+                    {record.text}
+                  </h6>
+                );
+              })}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  makeComment(e.target[0].value, item._id);
+                }}
+              >
+                <input
+                  className='comments'
+                  type='text'
+                  placeholder='Add a comment'
+                />
+              </form>
             </div>
           </div>
         );
