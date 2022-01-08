@@ -1,56 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Home = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch('/allposts', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result.posts);
+      });
+  });
   return (
     <div className='home'>
-      <div className='card home-card'>
-        <h5>Laura</h5>
-        <div className='card-image'>
-          <img
-            src='https://tripspi-prod.imgix.net/blogs/60ewipugMR/Pfiv0-david-edelstein-N4DbvTUDikw-unsplash.jpg?ixlib=js-2.3.2&w=1024&auto=compress&fit=crop&s=919afc22d09ca569980b1c99fd2af23d'
-            alt=''
-          />
-        </div>
-        <div className='card-content'>
-          <i className='material-icons' style={{ color: 'red' }}>
-            favorite
-          </i>
-          <h6>Title</h6>
-          <p>This is an Amazing place </p>
-          <input type='text' placeholder='Add a comment' />
-        </div>
-      </div>
-      <div className='card home-card'>
-        <h5>Laura</h5>
-        <div className='card-image'>
-          <img src='https://wallpaperaccess.com/full/18448.jpg' alt='' />
-        </div>
-        <div className='card-content'>
-          <i className='material-icons' style={{ color: 'red' }}>
-            favorite
-          </i>
-          <h6>Title</h6>
-          <p>This is an Amazing place </p>
-          <input type='text' placeholder='Add a comment' />
-        </div>
-      </div>
-      <div className='card home-card'>
-        <h5>Laura</h5>
-        <div className='card-image'>
-          <img
-            src='https://cdn.pixabay.com/photo/2018/06/30/17/02/model-3508004__340.jpg'
-            alt=''
-          />
-        </div>
-        <div className='card-content'>
-          <i className='material-icons' style={{ color: 'red' }}>
-            favorite
-          </i>
-          <h6>Ass</h6>
-          <p>OH MY GOD! </p>
-          <input type='text' placeholder='Add a comment' />
-        </div>
-      </div>
+      {data.map((item) => {
+        return (
+          <div className='card home-card' key={item._id}>
+            <h5>{item.postedBy.name}</h5>
+            <div className='card-image'>
+              <img src={item.photo} alt='' />
+            </div>
+            <div className='card-content'>
+              <i className='material-icons' style={{ color: 'red' }}>
+                favorite
+              </i>
+              <h6>{item.title}</h6>
+              <p>{item.body}</p>
+              <input type='text' placeholder='Add a comment' />
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
