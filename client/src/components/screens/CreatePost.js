@@ -24,7 +24,6 @@ const CreatePost = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data.error) {
             M.toast({ html: data.error, classes: '#c62828 red darken-3' });
           } else {
