@@ -26,8 +26,8 @@ router.get('/myposts', requireLogin, async (req, res) => {
 });
 
 router.post('/createpost', requireLogin, async (req, res) => {
-  const { title, body } = req.body;
-  if (!title || !body) {
+  const { title, body, pic } = req.body;
+  if (!title || !body || !pic) {
     return res.status(422).json({ error: 'Please fill the required fields.' });
   }
   try {
@@ -35,6 +35,7 @@ router.post('/createpost', requireLogin, async (req, res) => {
     const post = new Post({
       title,
       body,
+      pic,
       postedBy: req.user,
     });
     const result = await post.save();
