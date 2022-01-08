@@ -7,6 +7,8 @@ export const reducer = (state, action) => {
       return {
         payload,
       };
+    case 'CLEAR':
+      return null;
     default:
       return state;
   }
