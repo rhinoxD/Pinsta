@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../App';
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const { state, dispatch } = useContext(UserContext);
   useEffect(() => {
     fetch('/allposts', {
       headers: {
@@ -12,7 +14,55 @@ const Home = () => {
       .then((result) => {
         setData(result.posts);
       });
-  });
+  }, []);
+  const likePost = (id) => {
+    fetch('/like', {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+      },
+      body: JSON.stringify({ postId: id }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const newData = data.map((item) => {
+          if (item._id === result._id) {
+            return result;
+          } else {
+            return item;
+          }
+        });
+        setData(newData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const unlikePost = (id) => {
+    fetch('/unlike', {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+      },
+      body: JSON.stringify({ postId: id }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const newData = data.map((item) => {
+          if (item._id === result._id) {
+            return result;
+          } else {
+            return item;
+          }
+        });
+        setData(newData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className='home'>
       {data.map((item) => {
@@ -20,12 +70,43 @@ const Home = () => {
           <div className='card home-card' key={item._id}>
             <h5>{item.postedBy.name}</h5>
             <div className='card-image'>
-              <img src={item.photo} alt='' />
+              {item.likes.includes(state.payload._id) ? (
+                <img
+                  src={item.photo}
+                  alt=''
+                  onDoubleClick={() => unlikePost(item._id)}
+                  style={{ cursor: 'pointer' }}
+                />
+              ) : (
+                <img
+                  src={item.photo}
+                  alt=''
+                  onDoubleClick={() => likePost(item._id)}
+                  style={{ cursor: 'pointer' }}
+                />
+              )}
             </div>
             <div className='card-content'>
-              <i className='material-icons' style={{ color: 'red' }}>
-                favorite
-              </i>
+              {item.likes.includes(state.payload._id) ? (
+                <i
+                  className='material-icons'
+                  style={{ color: 'red', cursor: 'Pointer' }}
+                  onClick={() => unlikePost(item._id)}
+                >
+                  favorite
+                </i>
+              ) : (
+                <i
+                  className='material-icons'
+                  style={{ color: 'red', cursor: 'Pointer' }}
+                  onClick={() => likePost(item._id)}
+                >
+                  favorite_border
+                </i>
+              )}
+              <h6>
+                {item.likes.length} {item.likes.length === 1 ? 'like' : 'likes'}
+              </h6>
               <h6>{item.title}</h6>
               <p>{item.body}</p>
               <input type='text' placeholder='Add a comment' />

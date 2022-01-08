@@ -65,7 +65,7 @@ router.put('/like', requireLogin, (req, res) => {
   });
 });
 
-router.delete('/unlike', requireLogin, (req, res) => {
+router.put('/unlike', requireLogin, (req, res) => {
   Post.findByIdAndUpdate(
     req.body.postId,
     {
