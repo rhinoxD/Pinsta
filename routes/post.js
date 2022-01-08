@@ -136,4 +136,25 @@ router.delete('/deletepost/:postId', requireLogin, (req, res) => {
     });
 });
 
+// router.delete('/deletecomment/:commentId', requireLogin, (req, res) => {
+//   Post.findOne({ _id: req.params.commentId })
+//     .populate('postedBy', '_id')
+//     .exec((error, comment) => {
+//       if (error || !comment) {
+//         return res.status(422).json({ error });
+//       }
+//       console.log(comment);
+//       if (comment.postedBy._id.toString() === req.user._id.toString()) {
+//         comment
+//           .remove()
+//           .then((result) => {
+//             res.json(result);
+//           })
+//           .catch((error) => {
+//             console.log(error);
+//           });
+//       }
+//     });
+// });
+
 module.exports = router;

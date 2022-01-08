@@ -4,6 +4,8 @@ import { UserContext } from '../../App';
 const Home = () => {
   const [data, setData] = useState([]);
   const { state, dispatch } = useContext(UserContext);
+  // console.log(state);
+  // console.log(data);
   useEffect(() => {
     fetch('/allposts', {
       headers: {
@@ -109,6 +111,30 @@ const Home = () => {
         setData(newData);
       });
   };
+  // const deleteComment = (commentId) => {
+  //   fetch(`/deletecomment/${commentId}`, {
+  //     method: 'delete',
+  //     headers: {
+  //       Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       console.log(result);
+  //       const com = result.comments.filter((comment) => {
+  //         console.log(comment._id);
+  //         return comment._id;
+  //       });
+  //       const newData = data.filter((item) => {
+  //         const comm = item.comments.filter((comment) => {
+  //           console.log(comment._id);
+  //           return comment._id;
+  //         });
+  //         return comm !== com;
+  //       });
+  //       setData(newData);
+  //     });
+  // };
   return (
     <div className='home'>
       {data.map((item) => {
@@ -186,7 +212,7 @@ const Home = () => {
                           float: 'right',
                           cursor: 'pointer',
                         }}
-                        onClick={() => deletePost(item._id)}
+                        onClick={() => deleteComment(item._id)}
                       >
                         delete
                       </i>
