@@ -4,6 +4,7 @@ import { UserContext } from '../../App';
 const Profile = () => {
   const [mypics, setMypics] = useState([]);
   const { state, dispatch } = useContext(UserContext);
+  // console.log(state);
   useEffect(() => {
     fetch('/myposts', {
       headers: {
@@ -29,12 +30,13 @@ const Profile = () => {
         <div>
           <img
             style={{ width: '160px', height: '160px', borderRadius: '80px' }}
-            src='https://yt3.ggpht.com/VZdyGhjcWxPkljggdCqqj8sK8Xcy5NdrlJbgbwn0BD5hFdjz0NScRknEqPHEeECHj0I4iGqpPA=s900-c-k-c0x00ffffff-no-rj'
+            src={state && state.payload.pic}
             alt=''
           />
         </div>
         <div>
           <h5>{state && state.payload.name}</h5>
+          <h6>{state && state.payload.email}</h6>
           <div
             style={{
               display: 'flex',

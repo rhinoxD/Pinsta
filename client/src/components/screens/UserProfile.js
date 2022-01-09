@@ -110,7 +110,7 @@ const UserProfile = () => {
                   height: '160px',
                   borderRadius: '80px',
                 }}
-                src='https://yt3.ggpht.com/VZdyGhjcWxPkljggdCqqj8sK8Xcy5NdrlJbgbwn0BD5hFdjz0NScRknEqPHEeECHj0I4iGqpPA=s900-c-k-c0x00ffffff-no-rj'
+                src={userProfile.user.pic}
                 alt=''
               />
             </div>

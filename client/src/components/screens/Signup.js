@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 
@@ -7,7 +7,31 @@ const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const PostData = () => {
+  const [image, setImage] = useState('');
+  const [url, setUrl] = useState(undefined);
+  useEffect(() => {
+    if (url) {
+      uploadFields();
+    }
+  }, [url]);
+  const uploadPic = () => {
+    const data = new FormData();
+    data.append('file', image);
+    data.append('upload_preset', 'insta-clone');
+    data.append('cloud-name', 'dgcs2lm7o');
+    fetch('https://api.cloudinary.com/v1_1/dgcs2lm7o/image/upload', {
+      method: 'post',
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUrl(data.secure_url);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const uploadFields = () => {
     if (
       !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
@@ -25,6 +49,7 @@ const Signup = () => {
         name,
         email,
         password,
+        pic: url,
       }),
     })
       .then((res) => res.json())
@@ -39,6 +64,13 @@ const Signup = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+  const PostData = () => {
+    if (image) {
+      uploadPic();
+    } else {
+      uploadFields();
+    }
   };
   return (
     <div className='my-card'>
@@ -62,6 +94,15 @@ const Signup = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <div className='file-field input-field'>
+          <div className='btn #2196f3 blue'>
+            <span>Upload Pfp</span>
+            <input type='file' onChange={(e) => setImage(e.target.files[0])} />
+          </div>
+          <div className='file-path-wrapper'>
+            <input className='file-path validate' type='text' />
+          </div>
+        </div>
         <button
           className='btn waves-effect waves-light #2196f3 blue'
           onClick={() => PostData()}

@@ -5,7 +5,7 @@ import { UserContext } from '../../App';
 const SubUserPosts = () => {
   const [data, setData] = useState([]);
   const { state, dispatch } = useContext(UserContext);
-  console.log(state);
+  // console.log(state);
   // console.log(data);
   useEffect(() => {
     fetch('/getsubpost', {
