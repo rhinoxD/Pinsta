@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
 
-const Home = () => {
+const SubUserPosts = () => {
   const [data, setData] = useState([]);
   const { state, dispatch } = useContext(UserContext);
   console.log(state);
   // console.log(data);
   useEffect(() => {
-    fetch('/allposts', {
+    fetch('/getsubpost', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('jwt'),
       },
@@ -112,36 +112,12 @@ const Home = () => {
         setData(newData);
       });
   };
-  // const deleteComment = (commentId) => {
-  //   fetch(`/deletecomment/${commentId}`, {
-  //     method: 'delete',
-  //     headers: {
-  //       Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       console.log(result);
-  //       const com = result.comments.filter((comment) => {
-  //         console.log(comment._id);
-  //         return comment._id;
-  //       });
-  //       const newData = data.filter((item) => {
-  //         const comm = item.comments.filter((comment) => {
-  //           console.log(comment._id);
-  //           return comment._id;
-  //         });
-  //         return comm !== com;
-  //       });
-  //       setData(newData);
-  //     });
-  // };
   return (
     <div className='home'>
       {data.map((item) => {
         return (
           <div className='card home-card' key={item._id}>
-            <h5 style={{ paddingLeft: '8px', paddingTop: '5px' }}>
+            <h5 style={{paddingLeft:'8px', paddingTop: '5px'}}>
               <Link
                 to={
                   item.postedBy._id !== state.payload._id
@@ -213,19 +189,6 @@ const Home = () => {
                       <strong>{record.postedBy.name}</strong>
                     </span>{' '}
                     {record.text}
-                    {/* {item.postedBy._id === state.payload._id && (
-                      <i
-                        className='material-icons'
-                        style={{
-                          color: 'red',
-                          float: 'right',
-                          cursor: 'pointer',
-                        }}
-                        onClick={() => deleteComment(item._id)}
-                      >
-                        delete
-                      </i>
-                    )} */}
                   </h6>
                 );
               })}
@@ -249,4 +212,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default SubUserPosts;
