@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(cors());
 app.use(require('./routes/auth'));
 app.use(require('./routes/post'));
+app.use(require('./routes/user'));
 
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
