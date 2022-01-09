@@ -19,4 +19,60 @@ router.get('/user/:id', requireLogin, async (req, res) => {
   }
 });
 
+router.put('/follow', requireLogin, (req, res) => {
+  User.findByIdAndUpdate(
+    req.body.followId,
+    {
+      $push: { followers: req.user._id },
+    },
+    {
+      new: true,
+    },
+    (error, result) => {
+      if (error) return res.status(422).json({ error });
+      User.findByIdAndUpdate(
+        req.user._id,
+        {
+          $push: { following: req.body.followId },
+        },
+        { new: true }
+      )
+        .then((result) => {
+          res.json(result);
+        })
+        .catch((error) => {
+          return res.status(422).json({ error });
+        });
+    }
+  );
+});
+
+router.put('/unfollow', requireLogin, (req, res) => {
+  User.findByIdAndUpdate(
+    req.body.unfollowId,
+    {
+      $pull: { followers: req.user._id },
+    },
+    {
+      new: true,
+    },
+    (error, result) => {
+      if (error) return res.status(422).json({ error });
+      User.findByIdAndUpdate(
+        req.user._id,
+        {
+          $pull: { following: req.body.unfollowId },
+        },
+        { new: true }
+      )
+        .then((result) => {
+          res.json(result);
+        })
+        .catch((error) => {
+          return res.status(422).json({ error });
+        });
+    }
+  );
+});
+
 module.exports = router;
