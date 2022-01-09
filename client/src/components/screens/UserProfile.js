@@ -4,9 +4,11 @@ import { UserContext } from '../../App';
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState(null);
-  const [showFollow, setShowFollow] = useState(true);
   const { state, dispatch } = useContext(UserContext);
   const { userId } = useParams();
+  const [showFollow, setShowFollow] = useState(
+    state ? !state.payload.following.includes(userId) : true
+  );
   useEffect(() => {
     fetch(`/user/${userId}`, {
       headers: {
