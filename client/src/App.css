@@ -36,6 +36,8 @@ h2 {
 
 .item {
   width: 30%;
+  height: 180px;
+  align-self: center;
 }
 
 .home-card {
