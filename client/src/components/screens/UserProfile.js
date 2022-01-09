@@ -18,6 +18,28 @@ const UserProfile = () => {
         setUserProfile(result);
       });
   }, []);
+  const followUser = async () => {
+    try {
+      const res = await fetch('/follow', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+        },
+        body: JSON.stringify({
+          followId: userId,
+        }),
+      });
+      const data = await res.json();
+      dispatch({
+        type: 'UPDATE',
+        payload: { following: data.following, followers: data.followers },
+      });
+      localStorage.setItem('user', JSON.stringify(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       {!userProfile ? (
@@ -55,9 +77,15 @@ const UserProfile = () => {
                 }}
               >
                 <h6>{userProfile.posts.length} Posts</h6>
-                <h6>40 Followers</h6>
-                <h6>40 Following</h6>
+                <h6>{userProfile.user.followers.length} Followers</h6>
+                <h6>{userProfile.user.following.length} Following</h6>
               </div>
+              <button
+                className='btn waves-effect waves-light #2196f3 blue'
+                onClick={() => followUser()}
+              >
+                Follow
+              </button>
             </div>
           </div>
           <div className='gallery'>
