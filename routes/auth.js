@@ -8,12 +8,12 @@ const { JWT_SECRET } = require('../config/keys');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+const { SENDGRID_API, EMAIL } = require('../config/keys');
 
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
-      api_key:
-        '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',
+      api_key: SENDGRID_API,
     },
   })
 );
