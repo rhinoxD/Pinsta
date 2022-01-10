@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const bcrypt = require('bcryptjs');
-const { JWT_SECRET } = require('../keys');
+const { JWT_SECRET } = require('../config/keys');
 const jwt = require('jsonwebtoken');
 const requireLogin = require('../middlewares/requireLogin');
 
