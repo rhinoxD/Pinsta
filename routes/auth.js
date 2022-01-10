@@ -5,7 +5,17 @@ const User = mongoose.model('User');
 const bcrypt = require('bcryptjs');
 const { JWT_SECRET } = require('../config/keys');
 const jwt = require('jsonwebtoken');
-const requireLogin = require('../middlewares/requireLogin');
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
+
+const transporter = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key:
+        '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',
+    },
+  })
+);
 
 router.post('/signup', async (req, res) => {
   const { name, email, password, pic } = req.body;
@@ -30,6 +40,12 @@ router.post('/signup', async (req, res) => {
         pic,
       });
       await user.save();
+      transporter.sendMail({
+        to: user.email,
+        from: 'no-reply@insta.com',
+        subject: 'Signup Success',
+        html: '<h1>Welcome to Instagram!</h1>',
+      });
       res.json({ message: 'Registered Successfully.' });
     }
   } catch (error) {
