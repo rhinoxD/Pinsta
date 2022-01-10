@@ -148,15 +148,17 @@ router.delete('/deletepost/:postId', requireLogin, (req, res) => {
 });
 
 // router.delete('/deletecomment/:commentId', requireLogin, (req, res) => {
-//   Post.findOne({ _id: req.params.commentId })
+//   Post.findOne({ comments: req.params.commentId })
 //     .populate('postedBy', '_id')
-//     .exec((error, comment) => {
-//       if (error || !comment) {
+//     .exec((error, comments) => {
+//       if (error || !comments) {
 //         return res.status(422).json({ error });
 //       }
-//       console.log(comment);
-//       if (comment.postedBy._id.toString() === req.user._id.toString()) {
-//         comment
+//       const com = comments.comments.map((comment) => {
+//         return comment._id;
+//       });
+//       if (com.toString() !== req.params.commentId) {
+//         comments
 //           .remove()
 //           .then((result) => {
 //             res.json(result);
@@ -166,6 +168,12 @@ router.delete('/deletepost/:postId', requireLogin, (req, res) => {
 //           });
 //       }
 //     });
+//   // res.status(200).json({ message: 'Comment Deleted Successfully' });
+// });
+
+// router.delete('/deletecomment/:postId/:commentId', requireLogin, (req, res) => {
+//   Post.findByIdAndRemove(req.params.commentId).populate('postedBy', '_id');
+//   res.status(200).json({ message: 'Comment Deleted Successfully' });
 // });
 
 module.exports = router;

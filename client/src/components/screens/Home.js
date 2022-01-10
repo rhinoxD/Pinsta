@@ -96,6 +96,42 @@ const Home = () => {
       });
     coms.forEach((com) => (com.value = ''));
   };
+  // const deleteComment = (commentId) => {
+  //   fetch(`/deletecomment/${commentId}`, {
+  //     method: 'delete',
+  //     headers: {
+  //       'Content-Type': ' application/json',
+  //       Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+  //     },
+  //     body: JSON.stringify({
+  //       commentId,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       console.log(result);
+  //       const newData = data.map((item) => {
+  //         console.log(item);
+  //         const com =
+  //           result &&
+  //           result.comments.filter((comment) => {
+  //             console.log(comment._id);
+  //             return comment._id;
+  //           });
+  //         const comm =
+  //           item &&
+  //           item.comments.filter((comment) => {
+  //             console.log(comment._id);
+  //             return comment._id;
+  //           });
+  //         return comm !== com;
+  //       });
+  //       setData(newData);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   const deletePost = (postId) => {
     fetch(`/deletepost/${postId}`, {
       method: 'delete',
@@ -139,6 +175,7 @@ const Home = () => {
   return (
     <div className='home'>
       {data.map((item) => {
+        // console.log(item);
         return (
           <div className='card home-card' key={item._id}>
             <h5 style={{ paddingLeft: '8px', paddingTop: '5px' }}>
@@ -221,7 +258,7 @@ const Home = () => {
                           float: 'right',
                           cursor: 'pointer',
                         }}
-                        onClick={() => deleteComment(item._id)}
+                        onClick={() => deleteComment(record._id)}
                       >
                         delete
                       </i>
