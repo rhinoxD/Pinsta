@@ -1,29 +1,25 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import M from 'materialize-css';
-const Reset = () => {
+const NewPassword = () => {
   const history = useHistory();
-  const [email, setEmail] = useState('');
+  const [password, setPasword] = useState('');
+  const { token } = useParams();
+  console.log(token);
   const PostData = () => {
-    if (
-      !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        email
-      )
-    ) {
-      M.toast({ html: 'invalid email', classes: '#c62828 red darken-3' });
-      return;
-    }
-    fetch('/reset-password', {
+    fetch('/new-password', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email,
+        password,
+        token,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.error) {
           M.toast({ html: data.error, classes: '#c62828 red darken-3' });
         } else {
@@ -39,21 +35,22 @@ const Reset = () => {
     <div className='mycard'>
       <div className='card auth-card input-field'>
         <h2>Instagram</h2>
+
         <input
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type='password'
+          placeholder='Enter a new password'
+          value={password}
+          onChange={(e) => setPasword(e.target.value)}
         />
         <button
           className='btn waves-effect waves-light #64b5f6 blue darken-1'
           onClick={() => PostData()}
         >
-          Reset password
+          Update password
         </button>
       </div>
     </div>
   );
 };
 
-export default Reset;
+export default NewPassword;

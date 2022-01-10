@@ -69,6 +69,9 @@ const Signin = () => {
         <h6>
           <Link to='/signup'>Don't have an account?</Link>
         </h6>
+        <p>
+          <Link to='/reset'>Forgot Password</Link>
+        </p>
       </div>
     </div>
   );
