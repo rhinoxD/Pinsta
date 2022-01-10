@@ -33,10 +33,10 @@ const Profile = () => {
           setUrl(data.secure_url);
           localStorage.setItem(
             'user',
-            JSON.stringify({ ...state, pic: data.secure_url })
+            JSON.stringify({ ...state.payload, pic: data.secure_url })
           );
           dispatch({ type: 'UPDATEPFP', payload: data.secure_url });
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error);
