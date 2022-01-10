@@ -17,9 +17,7 @@
     "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^6.1.5",
     "nodemailer": "^6.7.2",
+    "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.15"
-  },
-  "devDependencies": {
-    "nodemailer-sendgrid-transport": "^0.2.0"
   }
 }
