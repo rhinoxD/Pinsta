@@ -5,8 +5,7 @@ const Profile = () => {
   const [mypics, setMypics] = useState([]);
   const { state, dispatch } = useContext(UserContext);
   const [image, setImage] = useState('');
-  const [url, setUrl] = useState('');
-  console.log(state);
+  // console.log(state);
   useEffect(() => {
     fetch('/myposts', {
       headers: {
@@ -30,13 +29,24 @@ const Profile = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setUrl(data.secure_url);
-          localStorage.setItem(
-            'user',
-            JSON.stringify({ ...state.payload, pic: data.secure_url })
-          );
-          dispatch({ type: 'UPDATEPFP', payload: data.secure_url });
-          window.location.reload();
+          fetch('/updatepic', {
+            method: 'put',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+            },
+            body: JSON.stringify({ pic: data.url }),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
+              localStorage.setItem(
+                'user',
+                JSON.stringify({ ...state.payload, pic: result.pic })
+              );
+              dispatch({ type: 'UPDATEPFP', payload: result.pic });
+              window.location.reload();
+            });
         })
         .catch((error) => {
           console.log(error);
