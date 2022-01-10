@@ -5,8 +5,8 @@ import { UserContext } from '../../App';
 const Home = () => {
   const [data, setData] = useState([]);
   const { state, dispatch } = useContext(UserContext);
-  // console.log(state);
-  // console.log(data);
+  console.log(state);
+  console.log(data);
   useEffect(() => {
     fetch('/allposts', {
       headers: {

@@ -4,7 +4,9 @@ import { UserContext } from '../../App';
 const Profile = () => {
   const [mypics, setMypics] = useState([]);
   const { state, dispatch } = useContext(UserContext);
-  // console.log(state);
+  const [image, setImage] = useState('');
+  const [url, setUrl] = useState('');
+  console.log(state);
   useEffect(() => {
     fetch('/myposts', {
       headers: {
@@ -16,6 +18,34 @@ const Profile = () => {
         setMypics(result.myPosts);
       });
   }, []);
+  useEffect(() => {
+    if (image) {
+      const data = new FormData();
+      data.append('file', image);
+      data.append('upload_preset', 'insta-clone');
+      data.append('cloud-name', 'dgcs2lm7o');
+      fetch('https://api.cloudinary.com/v1_1/dgcs2lm7o/image/upload', {
+        method: 'post',
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setUrl(data.secure_url);
+          localStorage.setItem(
+            'user',
+            JSON.stringify({ ...state, pic: data.secure_url })
+          );
+          dispatch({ type: 'UPDATEPFP', payload: data.secure_url });
+          // window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [image]);
+  const updatePfp = (file) => {
+    setImage(file);
+  };
   return (
     <div style={{ maxWidth: '750px', margin: '0 auto' }}>
       <div
@@ -47,6 +77,22 @@ const Profile = () => {
             <h6>{mypics.length} Posts</h6>
             <h6>{state && state.payload.followers.length} Followers</h6>
             <h6>{state && state.payload.following.length} Following</h6>
+          </div>
+          <div className='file-field input-field'>
+            <div className='btn #2196f3 blue'>
+              <span>Update PFP</span>
+              <input
+                type='file'
+                onChange={(e) => updatePfp(e.target.files[0])}
+              />
+            </div>
+            <div className='file-path-wrapper'>
+              <input
+                className='file-path validate'
+                type='text'
+                style={{ margin: 'auto' }}
+              />
+            </div>
           </div>
         </div>
       </div>
