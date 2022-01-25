@@ -1,4 +1,10 @@
-import { useEffect, createContext, useReducer, useContext } from 'react';
+import {
+  useEffect,
+  useState,
+  createContext,
+  useReducer,
+  useContext,
+} from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -6,6 +12,7 @@ import {
   useHistory,
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import { ThemeProvider } from 'styled-components';
 import './App.css';
 import Home from './components/screens/Home';
 import Profile from './components/screens/Profile';
@@ -47,15 +54,35 @@ const Routing = () => {
   );
 };
 
+const LightTheme = {
+  pageBackground: 'white',
+  titleColor: '#141E61',
+  tagLineColor: 'black',
+};
+
+const DarkTheme = {
+  pageBackground: '#282c36',
+  titleColor: '#lightpink',
+  tagLineColor: 'lavender',
+};
+
+const themes = {
+  light: LightTheme,
+  dark: DarkTheme,
+};
+
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [theme, setTheme] = useState('light');
   return (
-    <UserContext.Provider value={{ state, dispatch }}>
-      <Router>
-        <Navbar />
-        <Routing />
-      </Router>
-    </UserContext.Provider>
+    <ThemeProvider theme={themes[theme]}>
+      <UserContext.Provider value={{ state, dispatch }}>
+        <Router>
+          <Navbar theme={theme} setTheme={setTheme} />
+          <Routing />
+        </Router>
+      </UserContext.Provider>
+    </ThemeProvider>
   );
 }
 

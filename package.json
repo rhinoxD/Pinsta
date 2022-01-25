@@ -18,6 +18,8 @@
     "mongoose": "^6.1.5",
     "nodemailer": "^6.7.2",
     "nodemailer-sendgrid-transport": "^0.2.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "react-icons": "^4.3.1",
+    "styled-component": "^2.8.0"
   }
 }
