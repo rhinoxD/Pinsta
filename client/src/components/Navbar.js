@@ -2,13 +2,45 @@ import React, { useContext, useRef, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../App';
 import M from 'materialize-css';
+import styled from 'styled-components';
+import { CgSun } from 'react-icons/cg';
+import { HiMoon } from 'react-icons/hi';
 
-const Navbar = () => {
+const Toggle = styled.button`
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${(props) => props.theme.titleColor};
+  color: ${(props) => props.theme.pageBackground};
+  &:focus: {
+    outline: none;
+  }
+  transition: all 0.5s ease;
+  margin-left: auto;
+`;
+
+const Navbar = ({ theme, setTheme }) => {
   const searchModal = useRef(null);
   const [search, setSearch] = useState('');
   const [userDetails, setUserDetails] = useState([]);
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
+  function changeTheme() {
+    if (theme === 'light') {
+      document.body.style.background = '#282c36';
+      document.body.style.color = '#fff';
+      document.body.style.transition = 'all 0.5s ease';
+      setTheme('dark');
+    } else {
+      document.body.style.background = '#fff';
+      document.body.style.color = '#000';
+      document.body.style.transition = 'all 0.5s ease';
+      setTheme('light');
+    }
+  }
+  const icon = theme === 'light' ? <HiMoon size={30} /> : <CgSun size={30} />;
   useEffect(() => {
     M.Modal.init(searchModal.current);
   }, []);
@@ -16,6 +48,9 @@ const Navbar = () => {
     if (state) {
       return [
         <>
+          <li>
+            <Toggle onClick={changeTheme}>{icon}</Toggle>
+          </li>
           <li key='1'>
             <i
               className='large material-icons modal-trigger'
