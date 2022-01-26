@@ -40,7 +40,7 @@ const Navbar = ({ theme, setTheme }) => {
       setTheme('light');
     }
   }
-  const icon = theme === 'light' ? <HiMoon size={30} /> : <CgSun size={30} />;
+  const icon = theme === 'light' ? <HiMoon size={28} /> : <CgSun size={28} />;
   useEffect(() => {
     M.Modal.init(searchModal.current);
   }, []);
@@ -49,7 +49,14 @@ const Navbar = ({ theme, setTheme }) => {
     if (state) {
       return [
         <>
-          <li>
+          <li
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              height: '63px',
+              marginRight: '10px',
+            }}
+          >
             <Toggle onClick={changeTheme}>{icon}</Toggle>
           </li>
           <li key='1'>
@@ -124,7 +131,12 @@ const Navbar = ({ theme, setTheme }) => {
   };
   return (
     <nav>
-      <div className={`nav-wrapper ${theme === 'light' ? 'white' : 'black'}`}>
+      <div
+        className={`nav-wrapper ${theme === 'light' ? 'white' : 'black'}`}
+        style={{
+          transition: 'all 0.5s ease',
+        }}
+      >
         <Link to={state ? '/' : '/signin'} className='brand-logo left'>
           <span style={{ color: linkColor }}>Instagram</span>
         </Link>
