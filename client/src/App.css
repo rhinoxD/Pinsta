@@ -31,13 +31,14 @@ h2 {
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .item {
   width: 30%;
-  height: 180px;
-  align-self: center;
+  height: 280px;
+  padding-bottom: 40px;
 }
 
 .home-card {
