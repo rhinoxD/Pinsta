@@ -29,7 +29,7 @@ const Navbar = ({ theme, setTheme }) => {
   const { state, dispatch } = useContext(UserContext);
   function changeTheme() {
     if (theme === 'light') {
-      document.body.style.background = '#282c36';
+      document.body.style.background = '#000';
       document.body.style.color = '#fff';
       document.body.style.transition = 'all 0.5s ease';
       setTheme('dark');
@@ -44,6 +44,7 @@ const Navbar = ({ theme, setTheme }) => {
   useEffect(() => {
     M.Modal.init(searchModal.current);
   }, []);
+  const linkColor = theme === 'light' ? 'black' : 'white';
   const renderList = () => {
     if (state) {
       return [
@@ -57,17 +58,23 @@ const Navbar = ({ theme, setTheme }) => {
               style={{ color: 'black', cursor: 'pointer' }}
               data-target='modal1'
             >
-              search
+              <span style={{ color: linkColor }}>search</span>
             </i>
           </li>
           <li key='2'>
-            <Link to='/profile'>Profile</Link>
+            <Link to='/profile'>
+              <span style={{ color: linkColor }}>Profile</span>
+            </Link>
           </li>
           <li key='3'>
-            <Link to='/create'>Create Post</Link>
+            <Link to='/create'>
+              <span style={{ color: linkColor }}>Create Post</span>
+            </Link>
           </li>
           <li key='4'>
-            <Link to='/myfollowingposts'>My Following</Link>
+            <Link to='/myfollowingposts'>
+              <span style={{ color: linkColor }}>My Following</span>
+            </Link>
           </li>
           <li key='5'>
             <button
@@ -87,10 +94,15 @@ const Navbar = ({ theme, setTheme }) => {
       return [
         <>
           <li key='6'>
-            <Link to='/signin'>Login</Link>
+            <Link to='/signin'>
+              <span style={{ color: linkColor }}>Login</span>
+            </Link>
           </li>
           <li key='7'>
-            <Link to='/signup'>Signup</Link>
+            <Link to='/signup'>
+              {' '}
+              <span style={{ color: linkColor }}>Signup</span>
+            </Link>
           </li>
         </>,
       ];
@@ -112,9 +124,9 @@ const Navbar = ({ theme, setTheme }) => {
   };
   return (
     <nav>
-      <div className='nav-wrapper white'>
+      <div className={`nav-wrapper ${theme === 'light' ? 'white' : 'black'}`}>
         <Link to={state ? '/' : '/signin'} className='brand-logo left'>
-          Instagram
+          <span style={{ color: linkColor }}>Instagram</span>
         </Link>
         <ul id='nav-mobile' className='right'>
           {renderList()}
