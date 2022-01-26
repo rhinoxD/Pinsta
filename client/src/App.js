@@ -47,7 +47,11 @@ const Routing = ({ theme }) => {
       <Route path='/signup' component={Signup} exact />
       <Route path='/create' component={CreatePost} exact />
       <Route path='/profile/:userId' component={UserProfile} exact />
-      <Route path='/myfollowingposts' component={SubUserPosts} exact />
+      <Route
+        path='/myfollowingposts'
+        component={() => <SubUserPosts theme={theme} />}
+        exact
+      />
       <Route path='/reset' component={Reset} exact />
       <Route path='/reset/:token' component={NewPassword} exact />
     </Switch>

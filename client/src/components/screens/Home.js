@@ -286,6 +286,7 @@ const Home = ({ theme }) => {
                   className='comments'
                   type='text'
                   placeholder='Add a comment'
+                  style={{ color: linkColor }}
                 />
               </form>
             </div>

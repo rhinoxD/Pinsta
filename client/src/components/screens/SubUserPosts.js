@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
 
-const SubUserPosts = () => {
+const SubUserPosts = ({ theme }) => {
   const [data, setData] = useState([]);
   const { state, dispatch } = useContext(UserContext);
+  const linkColor = theme === 'light' ? 'black' : 'white';
+  const bgColor = theme === 'light' ? 'white' : 'black';
   // console.log(state);
   // console.log(data);
   useEffect(() => {
@@ -116,8 +118,12 @@ const SubUserPosts = () => {
     <div className='home'>
       {data.map((item) => {
         return (
-          <div className='card home-card' key={item._id}>
-            <h5 style={{paddingLeft:'8px', paddingTop: '5px'}}>
+          <div
+            className='card home-card'
+            key={item._id}
+            style={{ backgroundColor: bgColor }}
+          >
+            <h5 style={{ paddingLeft: '8px', paddingTop: '5px' }}>
               <Link
                 to={
                   item.postedBy._id !== state.payload._id
@@ -125,7 +131,7 @@ const SubUserPosts = () => {
                     : '/profile'
                 }
               >
-                {item.postedBy.name}
+                <span style={{ color: linkColor }}>{item.postedBy.name}</span>
               </Link>{' '}
               {item.postedBy._id === state.payload._id && (
                 <i
@@ -180,8 +186,12 @@ const SubUserPosts = () => {
               <h6>
                 {item.likes.length} {item.likes.length === 1 ? 'like' : 'likes'}
               </h6>
-              <h6>{item.title}</h6>
-              <p>{item.body}</p>
+              <h6>
+                <strong>{item.title}</strong>
+              </h6>
+              <p>
+                <em>{item.body}</em>
+              </p>
               {item.comments.map((record) => {
                 return (
                   <h6 key={record._id}>
@@ -202,6 +212,7 @@ const SubUserPosts = () => {
                   className='comments'
                   type='text'
                   placeholder='Add a comment'
+                  style={{ color: linkColor }}
                 />
               </form>
             </div>
