@@ -91,6 +91,7 @@ const Navbar = ({ theme, setTheme }) => {
                 dispatch({ type: 'CLEAR' });
                 history.push('/signin');
               }}
+              style={{marginRight: '10px'}}
             >
               Logout
             </button>
