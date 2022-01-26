@@ -238,18 +238,22 @@ const Home = () => {
                   favorite_border
                 </i>
               )}
-              <h6>
+              <h6 style={{ color: 'black' }}>
                 {item.likes.length} {item.likes.length === 1 ? 'like' : 'likes'}
               </h6>
-              <h6>{item.title}</h6>
-              <p>{item.body}</p>
+              <h6 style={{ color: 'black' }}>
+                <strong>{item.title}</strong>
+              </h6>
+              <p style={{ color: 'black' }}>
+                <em>{item.body}</em>
+              </p>
               {item.comments.map((record) => {
                 return (
                   <h6 key={record._id}>
-                    <span>
+                    <span style={{ color: 'black' }}>
                       <strong>{record.postedBy.name}</strong>
                     </span>{' '}
-                    {record.text}
+                    <span style={{ color: 'black' }}>{record.text}</span>
                     {/* {item.postedBy._id === state.payload._id && (
                       <i
                         className='material-icons'
