@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 
-const CreatePost = () => {
+const CreatePost = ({ theme }) => {
   const history = useHistory();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [image, setImage] = useState('');
   const [url, setUrl] = useState('');
+  const linkColor = theme === 'light' ? 'black' : 'white';
+  const bgColor = theme === 'light' ? 'white' : 'black';
   useEffect(() => {
     if (url) {
       fetch('/createpost', {
@@ -64,6 +66,7 @@ const CreatePost = () => {
         maxWidth: '500px',
         padding: '20px',
         textAlign: 'center',
+        backgroundColor: bgColor,
       }}
     >
       <input
@@ -71,12 +74,14 @@ const CreatePost = () => {
         placeholder='Title'
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        style={{ color: linkColor }}
       />
       <input
         type='text'
         placeholder='Body'
         value={body}
         onChange={(e) => setBody(e.target.value)}
+        style={{ color: linkColor }}
       />
       <div className='file-field input-field'>
         <div className='btn #2196f3 blue'>
