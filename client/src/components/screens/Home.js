@@ -2,11 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
 
-const Home = () => {
+const Home = ({ theme }) => {
   const [data, setData] = useState([]);
   const { state, dispatch } = useContext(UserContext);
-  console.log(state);
-  console.log(data);
+  const linkColor = theme === 'light' ? 'black' : 'white';
+  const bgColor = theme === 'light' ? 'white' : 'black';
+  // console.log(state);
+  // console.log(data);
   useEffect(() => {
     fetch('/allposts', {
       headers: {
@@ -177,7 +179,11 @@ const Home = () => {
       {data.map((item) => {
         // console.log(item);
         return (
-          <div className='card home-card' key={item._id}>
+          <div
+            className='card home-card'
+            key={item._id}
+            style={{ backgroundColor: bgColor }}
+          >
             <h5 style={{ paddingLeft: '8px', paddingTop: '5px' }}>
               <Link
                 to={
@@ -186,8 +192,8 @@ const Home = () => {
                     : '/profile'
                 }
               >
-                {item.postedBy.name}
-              </Link>{' '}
+                <span style={{ color: linkColor }}>{item.postedBy.name}</span>
+              </Link>
               {item.postedBy._id === state.payload._id && (
                 <i
                   className='material-icons'
@@ -238,22 +244,22 @@ const Home = () => {
                   favorite_border
                 </i>
               )}
-              <h6 style={{ color: 'black' }}>
+              <h6 style={{ color: linkColor }}>
                 {item.likes.length} {item.likes.length === 1 ? 'like' : 'likes'}
               </h6>
-              <h6 style={{ color: 'black' }}>
+              <h6 style={{ color: linkColor }}>
                 <strong>{item.title}</strong>
               </h6>
-              <p style={{ color: 'black' }}>
+              <p style={{ color: linkColor }}>
                 <em>{item.body}</em>
               </p>
               {item.comments.map((record) => {
                 return (
                   <h6 key={record._id}>
-                    <span style={{ color: 'black' }}>
+                    <span style={{ color: linkColor }}>
                       <strong>{record.postedBy.name}</strong>
                     </span>{' '}
-                    <span style={{ color: 'black' }}>{record.text}</span>
+                    <span style={{ color: linkColor }}>{record.text}</span>
                     {/* {item.postedBy._id === state.payload._id && (
                       <i
                         className='material-icons'

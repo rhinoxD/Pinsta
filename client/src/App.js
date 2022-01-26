@@ -27,7 +27,7 @@ import NewPassword from './components/screens/NewPassword';
 
 export const UserContext = createContext();
 
-const Routing = () => {
+const Routing = ({ theme }) => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
   useEffect(() => {
@@ -41,7 +41,7 @@ const Routing = () => {
   }, []);
   return (
     <Switch>
-      <Route path='/' component={Home} exact />
+      <Route path='/' component={() => <Home theme={theme} />} exact />
       <Route path='/profile' component={Profile} exact />
       <Route path='/signin' component={Signin} exact />
       <Route path='/signup' component={Signup} exact />
@@ -79,7 +79,7 @@ function App() {
       <UserContext.Provider value={{ state, dispatch }}>
         <Router>
           <Navbar theme={theme} setTheme={setTheme} />
-          <Routing />
+          <Routing theme={theme} />
         </Router>
       </UserContext.Provider>
     </ThemeProvider>
