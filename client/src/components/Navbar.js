@@ -91,7 +91,7 @@ const Navbar = ({ theme, setTheme }) => {
                 dispatch({ type: 'CLEAR' });
                 history.push('/signin');
               }}
-              style={{marginRight: '10px'}}
+              style={{ marginRight: '10px' }}
             >
               Logout
             </button>
@@ -101,6 +101,16 @@ const Navbar = ({ theme, setTheme }) => {
     } else {
       return [
         <>
+          <li
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              height: '63px',
+              marginRight: '10px',
+            }}
+          >
+            <Toggle onClick={changeTheme}>{icon}</Toggle>
+          </li>
           <li key='6'>
             <Link to='/signin'>
               <span style={{ color: linkColor }}>Login</span>
