@@ -56,3 +56,39 @@ h2 {
 .collection-item {
   width: 100%;
 }
+
+@media (max-width: 750px) {
+  .nav-wrapper a {
+    width: auto;
+    font-size: 14px;
+    padding: 0 11px;
+    height: auto;
+  }
+  .nav-wrapper ul {
+    margin-left: auto;
+  }
+  .nav-wrapper .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    font-size: 12px;
+    margin-top: 17px;
+    height: 25px;
+  }
+  .brand-logo {
+    font-size: 25px !important;
+    margin: auto;
+  }
+  .mode {
+    height: 55px !important;
+    margin-right: 7px !important;
+  }
+  .modal-trigger span {
+    font-size: 22px;
+    padding: 5px;
+  }
+  .hidden {
+    display: none;
+  }
+}

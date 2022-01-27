@@ -19,6 +19,13 @@ const Toggle = styled.button`
   }
   transition: all 0.5s ease;
   margin-left: auto;
+  @media screen and (max-width: 750px) {
+    display: flex;
+    alignItem: center;
+    justify-content: center;
+    max-width: 30px;
+    height: 30px;
+  }
 `;
 
 const Navbar = ({ theme, setTheme }) => {
@@ -51,7 +58,7 @@ const Navbar = ({ theme, setTheme }) => {
     if (state) {
       return [
         <>
-          <li
+          <li className='mode'
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -80,7 +87,7 @@ const Navbar = ({ theme, setTheme }) => {
               <span style={{ color: linkColor }}>Create Post</span>
             </Link>
           </li>
-          <li key='4'>
+          <li className='hidden' key='4'>
             <Link to='/myfollowingposts'>
               <span style={{ color: linkColor }}>My Following</span>
             </Link>
