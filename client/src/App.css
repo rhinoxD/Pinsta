@@ -38,6 +38,7 @@ h2 {
   height: 250px;
   margin: 0 5px;
   padding-bottom: 10px;
+  cursor: pointer;
 }
 
 .home-card {

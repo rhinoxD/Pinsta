@@ -45,6 +45,7 @@ const Navbar = ({ theme, setTheme }) => {
     M.Modal.init(searchModal.current);
   }, []);
   const linkColor = theme === 'light' ? 'black' : 'white';
+  const bgColor = theme === 'light' ? 'white' : 'black';
   const bor = theme === 'light' ? '' : '1px groove grey';
   const renderList = () => {
     if (state) {
@@ -157,20 +158,22 @@ const Navbar = ({ theme, setTheme }) => {
           {renderList()}
         </ul>
       </div>
-      <div
-        id='modal1'
-        className='modal'
-        ref={searchModal}
-        style={{ color: 'black' }}
-      >
-        <div className='modal-content'>
+      <div id='modal1' className='modal' ref={searchModal}>
+        <div
+          className='modal-content'
+          style={{ color: linkColor, backgroundColor: bgColor, padding: 0 }}
+        >
           <input
             type='text'
             placeholder='Search Users'
             value={search}
             onChange={(e) => fetchUsers(e.target.value)}
+            style={{ color: linkColor, fontStyle: 'italic' }}
           />
-          <ul className='collection' style={{ color: 'black' }}>
+          <ul
+            className='collection'
+            style={{ backgroundColor: bgColor, border: bor, margin: 0 }}
+          >
             {userDetails.map((item) => {
               return (
                 <Link
@@ -184,16 +187,41 @@ const Navbar = ({ theme, setTheme }) => {
                     setSearch('');
                   }}
                 >
-                  <li className='collection-item'>{item.name}</li>
+                  <li
+                    className='collection-item'
+                    style={{
+                      color: linkColor,
+                      backgroundColor: bgColor,
+                      fontStyle: 'italic',
+                    }}
+                  >
+                    {item.name}
+                  </li>
                 </Link>
               );
             })}
           </ul>
         </div>
-        <div className='modal-footer'>
+        <div
+          className='modal-footer'
+          style={{
+            color: linkColor,
+            backgroundColor: bgColor,
+            padding: 0,
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+          }}
+        >
           <button
             className='modal-close waves-effect waves-green btn-flat'
             onClick={() => setSearch('')}
+            style={{
+              color: linkColor,
+              backgroundColor: bgColor,
+              border: bor,
+              margin: '0 7px 0 0',
+            }}
           >
             Close
           </button>
