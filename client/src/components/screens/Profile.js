@@ -56,6 +56,22 @@ const Profile = () => {
   const updatePfp = (file) => {
     setImage(file);
   };
+  const deletePost = (postId) => {
+    fetch(`/deletepost/${postId}`, {
+      method: 'delete',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        const newData = mypics.filter((item) => {
+          return item._id !== result._id;
+        });
+        setMypics(newData);
+      });
+  };
   return (
     <div style={{ maxWidth: '750px', margin: '0 auto' }}>
       <div
@@ -109,12 +125,26 @@ const Profile = () => {
       <div className='gallery'>
         {mypics.map((item) => {
           return (
-            <img
-              key={item._id}
-              className='item'
-              src={item.photo}
-              alt={item.title}
-            />
+            <>
+              <img
+                key={item._id}
+                className='item'
+                src={item.photo}
+                alt={item.title}
+              />
+              {item.postedBy._id === state.payload._id && (
+                <i
+                  className='material-icons'
+                  style={{
+                    color: 'red',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => deletePost(item._id)}
+                >
+                  delete
+                </i>
+              )}
+            </>
           );
         })}
       </div>

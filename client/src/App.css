@@ -32,11 +32,17 @@ h2 {
   display: flex;
   flex-wrap: wrap;
 }
+.gallery i {
+  position: relative;
+  transform: translateX(-30px);
+  height: 0;
+  width: 0;
+}
 
 .item {
-  width: 32%;
+  width: 31%;
   height: 250px;
-  margin: 0 5px;
+  margin: 0 8.7px;
   padding-bottom: 10px;
   cursor: pointer;
 }
