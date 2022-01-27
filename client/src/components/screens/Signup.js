@@ -11,6 +11,7 @@ const Signup = ({ theme }) => {
   const [url, setUrl] = useState(undefined);
   const linkColor = theme === 'light' ? 'black' : 'white';
   const bgColor = theme === 'light' ? 'white' : 'black';
+  const bor = theme === 'light' ? '' : '1px groove grey';
   useEffect(() => {
     if (url) {
       uploadFields();
@@ -78,7 +79,7 @@ const Signup = ({ theme }) => {
     <div className='my-card'>
       <div
         className='card auth-card input-field'
-        style={{ backgroundColor: bgColor }}
+        style={{ backgroundColor: bgColor, border: bor }}
       >
         <h2 style={{ color: linkColor }}>Instagram</h2>
 
