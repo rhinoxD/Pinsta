@@ -10,6 +10,7 @@ const Signin = ({ theme }) => {
   const [password, setPassword] = useState('');
   const linkColor = theme === 'light' ? 'black' : 'white';
   const bgColor = theme === 'light' ? 'white' : 'black';
+  const bor = theme === 'light' ? '' : '1px groove grey';
   const PostData = () => {
     if (
       !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -49,7 +50,7 @@ const Signin = ({ theme }) => {
     <div className='my-card'>
       <div
         className='card auth-card input-field'
-        style={{ backgroundColor: bgColor }}
+        style={{ backgroundColor: bgColor, border: bor }}
       >
         <h2 style={{ color: linkColor }}>Instagram</h2>
         <input
@@ -57,19 +58,20 @@ const Signin = ({ theme }) => {
           placeholder='Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ color: linkColor }}
+          style={{ color: linkColor, fontStyle: 'italic' }}
         />
         <input
           type='password'
           placeholder='Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ color: linkColor }}
+          style={{ color: linkColor, fontStyle: 'italic' }}
         />
         <button
           className='btn waves-effect waves-light #2196f3 blue'
           onClick={() => PostData()}
           disabled={!email || !password}
+          style={{ margin: '15px 0 10px 0' }}
         >
           Login
         </button>
