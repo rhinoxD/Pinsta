@@ -45,6 +45,7 @@ const Navbar = ({ theme, setTheme }) => {
     M.Modal.init(searchModal.current);
   }, []);
   const linkColor = theme === 'light' ? 'black' : 'white';
+  const bor = theme === 'light' ? '' : '1px groove grey';
   const renderList = () => {
     if (state) {
       return [
@@ -146,6 +147,7 @@ const Navbar = ({ theme, setTheme }) => {
         className={`nav-wrapper ${theme === 'light' ? 'white' : 'black'}`}
         style={{
           transition: 'all 0.5s ease',
+          borderBottom: bor,
         }}
       >
         <Link to={state ? '/' : '/signin'} className='brand-logo left'>
