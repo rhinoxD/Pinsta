@@ -131,7 +131,7 @@ h2 {
   .update-pfp {
     margin-bottom: 10px;
   }
-  .update-pfp span{
+  .update-pfp span {
     font-size: 12px;
   }
   .update-pfp input {
@@ -142,5 +142,22 @@ h2 {
     justify-content: center;
     align-items: center;
     height: 35px;
+  }
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .gallery i {
+    position: relative;
+    transform: translateX(-30px);
+    height: 0;
+    width: 0;
+  }
+  .item {
+    width: 30%;
+    height: 150px;
+    margin: 0 6.9px;
+    padding-bottom: 10px;
+    cursor: pointer;
   }
 }
