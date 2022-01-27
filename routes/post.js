@@ -30,10 +30,9 @@ router.get('/getsubpost', requireLogin, async (req, res) => {
 
 router.get('/myposts', requireLogin, async (req, res) => {
   try {
-    const myPosts = await Post.find({ postedBy: req.user._id }).populate(
-      'postedBy',
-      '_id name'
-    );
+    const myPosts = await Post.find({ postedBy: req.user._id })
+      .populate('postedBy', '_id name')
+      .sort('-createdAt');
     res.json({ myPosts });
   } catch (error) {
     console.log(error);
