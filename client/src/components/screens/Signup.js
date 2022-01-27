@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 
-const Signup = () => {
+const Signup = ({ theme }) => {
   const history = useHistory();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [image, setImage] = useState('');
   const [url, setUrl] = useState(undefined);
+  const linkColor = theme === 'light' ? 'black' : 'white';
+  const bgColor = theme === 'light' ? 'white' : 'black';
   useEffect(() => {
     if (url) {
       uploadFields();
@@ -74,30 +76,41 @@ const Signup = () => {
   };
   return (
     <div className='my-card'>
-      <div className='card auth-card input-field'>
-        <h2>Instagram</h2>
+      <div
+        className='card auth-card input-field'
+        style={{ backgroundColor: bgColor }}
+      >
+        <h2 style={{ color: linkColor }}>Instagram</h2>
+
         <input
           type='text'
           placeholder='Name'
           value={name}
           onChange={(e) => setName(e.target.value)}
+          style={{ color: linkColor }}
         />
         <input
           type='email'
           placeholder='Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          style={{ color: linkColor }}
         />
         <input
           type='password'
           placeholder='Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          style={{ color: linkColor }}
         />
         <div className='file-field input-field'>
           <div className='btn #2196f3 blue'>
             <span>Upload Pfp</span>
-            <input type='file' onChange={(e) => setImage(e.target.files[0])} />
+            <input
+              type='file'
+              onChange={(e) => setImage(e.target.files[0])}
+              style={{ color: linkColor }}
+            />
           </div>
           <div className='file-path-wrapper'>
             <input className='file-path validate' type='text' />
@@ -111,7 +124,9 @@ const Signup = () => {
           Sign Up
         </button>
         <h6>
-          <Link to='/signin'>Already have an account?</Link>
+          <Link to='/signin'>
+            <span style={{ color: linkColor }}>Already have an account?</span>
+          </Link>
         </h6>
       </div>
     </div>
