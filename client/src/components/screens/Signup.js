@@ -88,25 +88,25 @@ const Signup = ({ theme }) => {
           placeholder='Name'
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={{ color: linkColor }}
+          style={{ color: linkColor, fontStyle: 'italic' }}
         />
         <input
           type='email'
           placeholder='Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ color: linkColor }}
+          style={{ color: linkColor, fontStyle: 'italic' }}
         />
         <input
           type='password'
           placeholder='Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ color: linkColor }}
+          style={{ color: linkColor, fontStyle: 'italic' }}
         />
         <div className='file-field input-field'>
           <div className='btn #2196f3 blue'>
-            <span>Upload Pfp</span>
+            <span style={{ fontStyle: 'italic' }}>Upload Pfp</span>
             <input
               type='file'
               onChange={(e) => setImage(e.target.files[0])}
@@ -126,7 +126,9 @@ const Signup = ({ theme }) => {
         </button>
         <h6>
           <Link to='/signin'>
-            <span style={{ color: linkColor }}>Already have an account?</span>
+            <span style={{ color: linkColor, fontStyle: 'italic' }}>
+              Already have an account?
+            </span>
           </Link>
         </h6>
       </div>

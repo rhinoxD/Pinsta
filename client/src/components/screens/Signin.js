@@ -77,12 +77,16 @@ const Signin = ({ theme }) => {
         </button>
         <h6>
           <Link to='/signup'>
-            <span style={{ color: linkColor }}>Don't have an account?</span>
+            <span style={{ color: linkColor, fontStyle: 'oblique' }}>
+              Don't have an account?
+            </span>
           </Link>
         </h6>
         <p>
           <Link to='/reset'>
-            <span style={{ color: linkColor }}>Forgot Password</span>
+            <span style={{ color: linkColor, fontStyle: 'italic' }}>
+              Forgot Password
+            </span>
           </Link>
         </p>
       </div>
