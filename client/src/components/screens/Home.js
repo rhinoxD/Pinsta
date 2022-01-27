@@ -259,7 +259,9 @@ const Home = ({ theme }) => {
                     <span style={{ color: linkColor }}>
                       <strong>{record.postedBy.name}</strong>
                     </span>{' '}
-                    <span style={{ color: linkColor }}>{record.text}</span>
+                    <span style={{ color: linkColor, fontStyle: 'italic' }}>
+                      {record.text}
+                    </span>
                     {/* {item.postedBy._id === state.payload._id && (
                       <i
                         className='material-icons'

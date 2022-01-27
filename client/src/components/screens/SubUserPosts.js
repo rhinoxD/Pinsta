@@ -198,7 +198,7 @@ const SubUserPosts = ({ theme }) => {
                     <span>
                       <strong>{record.postedBy.name}</strong>
                     </span>{' '}
-                    {record.text}
+                    <span style={{ fontStyle: 'italic' }}>{record.text}</span>
                   </h6>
                 );
               })}
