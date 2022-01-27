@@ -75,6 +75,7 @@ const Profile = () => {
   return (
     <div style={{ maxWidth: '750px', margin: '0 auto' }}>
       <div
+        className='main-profile'
         style={{
           display: 'flex',
           justifyContent: 'space-around',
@@ -83,17 +84,18 @@ const Profile = () => {
           boxShadow: '0px 6px 5px -7px #222',
         }}
       >
-        <div>
+        <div className='profile-image'>
           <img
             style={{ width: '160px', height: '160px', borderRadius: '80px' }}
             src={state && state.payload.pic}
             alt=''
           />
         </div>
-        <div>
+        <div className='details'>
           <h5>{state && state.payload.name}</h5>
           <h6>{state && state.payload.email}</h6>
-          <div
+          <div 
+          className='pff'
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -104,7 +106,7 @@ const Profile = () => {
             <h6>{state && state.payload.followers.length} Followers</h6>
             <h6>{state && state.payload.following.length} Following</h6>
           </div>
-          <div className='file-field input-field'>
+          <div className='file-field input-field update-pfp'>
             <div className='btn #2196f3 blue'>
               <span>Update PFP</span>
               <input
