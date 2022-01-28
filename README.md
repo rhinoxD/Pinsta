@@ -1,6 +1,6 @@
 # InstaClone
 
-<p align='center'>
+<p align="center">
 ![alt text](insta1.png)
 </p>
 <br>
