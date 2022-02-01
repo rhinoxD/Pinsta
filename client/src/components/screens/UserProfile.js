@@ -10,7 +10,7 @@ const UserProfile = () => {
     state ? !state.payload.following.includes(userId) : true
   );
   useEffect(() => {
-    fetch(`/user/${userId}`, {
+    fetch(`/api/user/${userId}`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('jwt'),
       },
