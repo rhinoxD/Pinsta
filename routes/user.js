@@ -91,7 +91,7 @@ router.put('/api/updatepic', requireLogin, (req, res) => {
   );
 });
 
-router.post('/search-users', (req, res) => {
+router.post('/api/search-users', (req, res) => {
   let userPattern = new RegExp('^' + req.body.query);
   User.find({ email: { $regex: userPattern } })
     .select('_id email name')

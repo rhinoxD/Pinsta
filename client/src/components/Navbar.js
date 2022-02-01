@@ -21,7 +21,7 @@ const Toggle = styled.button`
   margin-left: auto;
   @media screen and (max-width: 750px) {
     display: flex;
-    alignItem: center;
+    alignitem: center;
     justify-content: center;
     max-width: 30px;
     height: 30px;
@@ -58,7 +58,8 @@ const Navbar = ({ theme, setTheme }) => {
     if (state) {
       return [
         <>
-          <li className='mode'
+          <li
+            className='mode'
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -137,7 +138,7 @@ const Navbar = ({ theme, setTheme }) => {
   };
   const fetchUsers = (query) => {
     setSearch(query);
-    fetch('/search-users', {
+    fetch('/api/search-users', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
