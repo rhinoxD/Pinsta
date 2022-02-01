@@ -39,7 +39,7 @@ router.get('/api/myposts', requireLogin, async (req, res) => {
   }
 });
 
-router.post('/createpost', requireLogin, async (req, res) => {
+router.post('/api/createpost', requireLogin, async (req, res) => {
   const { title, body, pic } = req.body;
   if (!title || !body || !pic) {
     return res.status(422).json({ error: 'Please fill the required fields.' });

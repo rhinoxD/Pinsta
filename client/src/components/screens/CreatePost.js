@@ -12,7 +12,7 @@ const CreatePost = ({ theme }) => {
   const bgColor = theme === 'light' ? 'white' : 'black';
   useEffect(() => {
     if (url) {
-      fetch('/createpost', {
+      fetch('/api/createpost', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
