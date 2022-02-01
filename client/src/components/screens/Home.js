@@ -70,7 +70,7 @@ const Home = ({ theme }) => {
   };
   const makeComment = (text, postId) => {
     const coms = document.querySelectorAll('.comments');
-    fetch('/comment', {
+    fetch('/api/comment', {
       method: 'put',
       headers: {
         'Content-Type': ' application/json',

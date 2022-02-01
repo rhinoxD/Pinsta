@@ -103,7 +103,7 @@ router.put('/api/unlike', requireLogin, (req, res) => {
     });
 });
 
-router.put('/comment', requireLogin, (req, res) => {
+router.put('/api/comment', requireLogin, (req, res) => {
   const comment = {
     text: req.body.text,
     postedBy: req.user._id,
