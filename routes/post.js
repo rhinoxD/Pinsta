@@ -128,7 +128,7 @@ router.put('/api/comment', requireLogin, (req, res) => {
     });
 });
 
-router.delete('/deletepost/:postId', requireLogin, (req, res) => {
+router.delete('/api/deletepost/:postId', requireLogin, (req, res) => {
   Post.findOne({ _id: req.params.postId })
     .populate('postedBy', '_id')
     .exec((error, post) => {

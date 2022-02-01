@@ -57,7 +57,7 @@ const Profile = () => {
     setImage(file);
   };
   const deletePost = (postId) => {
-    fetch(`/deletepost/${postId}`, {
+    fetch(`/api/deletepost/${postId}`, {
       method: 'delete',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('jwt'),
