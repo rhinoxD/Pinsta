@@ -21,7 +21,7 @@ const Home = ({ theme }) => {
       });
   }, []);
   const likePost = (id) => {
-    fetch('/like', {
+    fetch('/api/like', {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',

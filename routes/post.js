@@ -61,7 +61,7 @@ router.post('/api/createpost', requireLogin, async (req, res) => {
   }
 });
 
-router.put('/like', requireLogin, (req, res) => {
+router.put('/api/like', requireLogin, (req, res) => {
   Post.findByIdAndUpdate(
     req.body.postId,
     {
