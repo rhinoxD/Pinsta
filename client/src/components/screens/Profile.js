@@ -7,7 +7,7 @@ const Profile = () => {
   const [image, setImage] = useState('');
   // console.log(state);
   useEffect(() => {
-    fetch('/myposts', {
+    fetch('/api/myposts', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('jwt'),
       },

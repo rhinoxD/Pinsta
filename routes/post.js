@@ -28,7 +28,7 @@ router.get('/api/getsubpost', requireLogin, async (req, res) => {
   }
 });
 
-router.get('/myposts', requireLogin, async (req, res) => {
+router.get('/api/myposts', requireLogin, async (req, res) => {
   try {
     const myPosts = await Post.find({ postedBy: req.user._id })
       .populate('postedBy', '_id name')
