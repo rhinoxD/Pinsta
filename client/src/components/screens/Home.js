@@ -10,7 +10,7 @@ const Home = ({ theme }) => {
   // console.log(state);
   // console.log(data);
   useEffect(() => {
-    fetch('/allposts', {
+    fetch('/api/allposts', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('jwt'),
       },
