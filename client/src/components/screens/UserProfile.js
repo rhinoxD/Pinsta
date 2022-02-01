@@ -95,6 +95,7 @@ const UserProfile = () => {
       ) : (
         <div style={{ maxWidth: '750px', margin: '0 auto' }}>
           <div
+          className='main-profile'
             style={{
               display: 'flex',
               justifyContent: 'space-around',
@@ -103,7 +104,7 @@ const UserProfile = () => {
               boxShadow: '0px 6px 5px -7px #222',
             }}
           >
-            <div>
+            <div className='profile-image'>
               <img
                 style={{
                   width: '160px',
@@ -114,10 +115,11 @@ const UserProfile = () => {
                 alt=''
               />
             </div>
-            <div>
+            <div className='details'>
               <h5>{userProfile.user.name}</h5>
               <h6>{userProfile.user.email}</h6>
               <div
+              className='pff'
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
@@ -128,23 +130,25 @@ const UserProfile = () => {
                 <h6>{userProfile.user.followers.length} Followers</h6>
                 <h6>{userProfile.user.following.length} Following</h6>
               </div>
+              <div className='update-pfp'>
               {showFollow ? (
                 <button
-                  className='btn waves-effect waves-light #2196f3 blue'
-                  style={{ marginTop: '6px' }}
-                  onClick={() => followUser()}
+                className='btn waves-effect waves-light #2196f3 blue'
+                style={{ marginTop: '6px' }}
+                onClick={() => followUser()}
                 >
                   Follow
                 </button>
               ) : (
                 <button
-                  className='btn waves-effect waves-light #2196f3 blue'
-                  style={{ marginTop: '6px' }}
-                  onClick={() => unfollowUser()}
+                className='btn waves-effect waves-light #2196f3 blue'
+                style={{ marginTop: '6px' }}
+                onClick={() => unfollowUser()}
                 >
                   Unfollow
                 </button>
               )}
+              </div>
             </div>
           </div>
           <div className='gallery'>
