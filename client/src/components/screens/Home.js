@@ -45,7 +45,7 @@ const Home = ({ theme }) => {
       });
   };
   const unlikePost = (id) => {
-    fetch('/unlike', {
+    fetch('/api/unlike', {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',
