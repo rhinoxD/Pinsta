@@ -113,7 +113,7 @@ router.post('/api/reset-password', (req, res) => {
   });
 });
 
-router.post('/new-password', (req, res) => {
+router.post('/api/new-password', (req, res) => {
   const newPassword = req.body.password;
   const sentToken = req.body.token;
   User.findOne({ resetToken: sentToken, expireToken: { $gt: Date.now() } })

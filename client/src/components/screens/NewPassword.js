@@ -7,7 +7,7 @@ const NewPassword = () => {
   const { token } = useParams();
   console.log(token);
   const PostData = () => {
-    fetch('/new-password', {
+    fetch('/api/new-password', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
