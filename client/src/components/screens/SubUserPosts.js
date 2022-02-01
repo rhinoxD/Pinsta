@@ -10,7 +10,7 @@ const SubUserPosts = ({ theme }) => {
   // console.log(state);
   // console.log(data);
   useEffect(() => {
-    fetch('/getsubpost', {
+    fetch('/api/getsubpost', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('jwt'),
       },
