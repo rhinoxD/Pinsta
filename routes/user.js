@@ -19,7 +19,7 @@ router.get('/api/user/:id', requireLogin, async (req, res) => {
   }
 });
 
-router.put('/follow', requireLogin, (req, res) => {
+router.put('/api/follow', requireLogin, (req, res) => {
   User.findByIdAndUpdate(
     req.body.followId,
     {
