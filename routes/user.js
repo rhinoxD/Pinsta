@@ -77,7 +77,7 @@ router.put('/api/unfollow', requireLogin, (req, res) => {
   );
 });
 
-router.put('/updatepic', requireLogin, (req, res) => {
+router.put('/api/updatepic', requireLogin, (req, res) => {
   User.findByIdAndUpdate(
     req.user._id,
     { $set: { pic: req.body.pic } },

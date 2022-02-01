@@ -29,7 +29,7 @@ const Profile = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          fetch('/updatepic', {
+          fetch('/api/updatepic', {
             method: 'put',
             headers: {
               'Content-Type': 'application/json',
