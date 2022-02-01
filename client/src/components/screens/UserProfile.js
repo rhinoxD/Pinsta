@@ -55,7 +55,7 @@ const UserProfile = () => {
   };
   const unfollowUser = async () => {
     try {
-      const res = await fetch('/unfollow', {
+      const res = await fetch('/api/unfollow', {
         method: 'put',
         headers: {
           'Content-Type': 'application/json',

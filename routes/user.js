@@ -48,7 +48,7 @@ router.put('/api/follow', requireLogin, (req, res) => {
   );
 });
 
-router.put('/unfollow', requireLogin, (req, res) => {
+router.put('/api/unfollow', requireLogin, (req, res) => {
   User.findByIdAndUpdate(
     req.body.unfollowId,
     {
