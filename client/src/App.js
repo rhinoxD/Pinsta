@@ -44,7 +44,7 @@ const Routing = ({ theme }) => {
       <Route path='/' component={() => <Home theme={theme} />} exact />
       <Route path='/profile' component={Profile} exact />
       <Route path='/api/signin' component={() => <Signin theme={theme} />} exact />
-      <Route path='/signup' component={() => <Signup theme={theme} />} exact />
+      <Route path='/api/signup' component={() => <Signup theme={theme} />} exact />
       <Route
         path='/create'
         component={() => <CreatePost theme={theme} />}

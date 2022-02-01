@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport(
   })
 );
 
-router.post('/signup', async (req, res) => {
+router.post('/api/signup', async (req, res) => {
   const { name, email, password, pic } = req.body;
   if (!name || !email || !password) {
     return res.status(422).json({

@@ -76,7 +76,7 @@ const Signin = ({ theme }) => {
           Login
         </button>
         <h6>
-          <Link to='/signup'>
+          <Link to='/api/signup'>
             <span style={{ color: linkColor, fontStyle: 'oblique' }}>
               Don't have an account?
             </span>

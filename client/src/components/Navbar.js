@@ -126,7 +126,7 @@ const Navbar = ({ theme, setTheme }) => {
             </Link>
           </li>
           <li key='7'>
-            <Link to='/signup'>
+            <Link to='/api/signup'>
               {' '}
               <span style={{ color: linkColor }}>Signup</span>
             </Link>
