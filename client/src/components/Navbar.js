@@ -98,7 +98,7 @@ const Navbar = ({ theme, setTheme }) => {
               onClick={() => {
                 localStorage.clear();
                 dispatch({ type: 'CLEAR' });
-                history.push('/signin');
+                history.push('/api/signin');
               }}
               style={{ marginRight: '10px' }}
             >
@@ -121,7 +121,7 @@ const Navbar = ({ theme, setTheme }) => {
             <Toggle onClick={changeTheme}>{icon}</Toggle>
           </li>
           <li key='6'>
-            <Link to='/signin'>
+            <Link to='/api/signin'>
               <span style={{ color: linkColor }}>Login</span>
             </Link>
           </li>
@@ -158,7 +158,7 @@ const Navbar = ({ theme, setTheme }) => {
           borderBottom: bor,
         }}
       >
-        <Link to={state ? '/' : '/signin'} className='brand-logo left'>
+        <Link to={state ? '/' : '/api/signin'} className='brand-logo left'>
           <span style={{ color: linkColor }}>Instagram</span>
         </Link>
         <ul id='nav-mobile' className='right'>

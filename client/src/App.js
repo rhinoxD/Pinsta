@@ -36,14 +36,14 @@ const Routing = ({ theme }) => {
       dispatch({ type: 'USER', payload: user });
     } else {
       if (!history.location.pathname.startsWith(`/reset`))
-        history.push('/signin');
+        history.push('/api/signin');
     }
   }, []);
   return (
     <Switch>
       <Route path='/' component={() => <Home theme={theme} />} exact />
       <Route path='/profile' component={Profile} exact />
-      <Route path='/signin' component={() => <Signin theme={theme} />} exact />
+      <Route path='/api/signin' component={() => <Signin theme={theme} />} exact />
       <Route path='/signup' component={() => <Signup theme={theme} />} exact />
       <Route
         path='/create'

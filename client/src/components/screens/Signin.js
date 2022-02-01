@@ -20,7 +20,7 @@ const Signin = ({ theme }) => {
       M.toast({ html: 'Invalid Email', classes: '#c62828 red darken-3' });
       return;
     }
-    fetch('/signin', {
+    fetch('/api/signin', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',

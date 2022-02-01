@@ -61,7 +61,7 @@ const Signup = ({ theme }) => {
           M.toast({ html: data.error, classes: '#c62828 red darken-3' });
         } else {
           M.toast({ html: data.message, classes: '#43a047 green' });
-          history.push('/signin');
+          history.push('/api/signin');
         }
       })
       .catch((error) => {
@@ -125,7 +125,7 @@ const Signup = ({ theme }) => {
           Sign Up
         </button>
         <h6>
-          <Link to='/signin'>
+          <Link to='/api/signin'>
             <span style={{ color: linkColor, fontStyle: 'italic' }}>
               Already have an account?
             </span>
