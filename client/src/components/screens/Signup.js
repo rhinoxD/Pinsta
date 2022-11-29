@@ -110,7 +110,8 @@ const Signup = ({ theme }) => {
             <input
               type='file'
               onChange={(e) => setImage(e.target.files[0])}
-              style={{ color: linkColor }}
+              color={linkColor}
+              style={{ color: linkColor, fontStyle: 'italic' }}
             />
           </div>
           <div className='file-path-wrapper'>

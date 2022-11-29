@@ -43,8 +43,16 @@ const Routing = ({ theme }) => {
     <Switch>
       <Route path='/' component={() => <Home theme={theme} />} exact />
       <Route path='/profile' component={Profile} exact />
-      <Route path='/api/signin' component={() => <Signin theme={theme} />} exact />
-      <Route path='/api/signup' component={() => <Signup theme={theme} />} exact />
+      <Route
+        path='/api/signin'
+        component={() => <Signin theme={theme} />}
+        exact
+      />
+      <Route
+        path='/api/signup'
+        component={() => <Signup theme={theme} />}
+        exact
+      />
       <Route
         path='/create'
         component={() => <CreatePost theme={theme} />}
@@ -56,7 +64,7 @@ const Routing = ({ theme }) => {
         component={() => <SubUserPosts theme={theme} />}
         exact
       />
-      <Route path='/reset' component={Reset} exact />
+      <Route path='/reset' component={() => <Reset theme={theme} />} exact />
       <Route path='/reset/:token' component={NewPassword} exact />
     </Switch>
   );
