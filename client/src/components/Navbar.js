@@ -1,10 +1,10 @@
-import React, { useContext, useRef, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { UserContext } from '../App';
-import M from 'materialize-css';
-import styled from 'styled-components';
-import { CgSun } from 'react-icons/cg';
-import { HiMoon } from 'react-icons/hi';
+import React, { useContext, useRef, useEffect, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { UserContext } from '../App'
+import M from 'materialize-css'
+import styled from 'styled-components'
+import { CgSun } from 'react-icons/cg'
+import { HiMoon } from 'react-icons/hi'
 
 const Toggle = styled.button`
   cursor: pointer;
@@ -26,34 +26,34 @@ const Toggle = styled.button`
     max-width: 30px;
     height: 30px;
   }
-`;
+`
 
 const Navbar = ({ theme, setTheme }) => {
-  const searchModal = useRef(null);
-  const [search, setSearch] = useState('');
-  const [userDetails, setUserDetails] = useState([]);
-  const history = useHistory();
-  const { state, dispatch } = useContext(UserContext);
+  const searchModal = useRef(null)
+  const [search, setSearch] = useState('')
+  const [userDetails, setUserDetails] = useState([])
+  const history = useHistory()
+  const { state, dispatch } = useContext(UserContext)
   function changeTheme() {
     if (theme === 'light') {
-      document.body.style.background = '#000';
-      document.body.style.color = '#fff';
-      document.body.style.transition = 'all 0.5s ease';
-      setTheme('dark');
+      document.body.style.background = '#000'
+      document.body.style.color = '#fff'
+      document.body.style.transition = 'all 0.5s ease'
+      setTheme('dark')
     } else {
-      document.body.style.background = '#fff';
-      document.body.style.color = '#000';
-      document.body.style.transition = 'all 0.5s ease';
-      setTheme('light');
+      document.body.style.background = '#fff'
+      document.body.style.color = '#000'
+      document.body.style.transition = 'all 0.5s ease'
+      setTheme('light')
     }
   }
-  const icon = theme === 'light' ? <HiMoon size={28} /> : <CgSun size={28} />;
+  const icon = theme === 'light' ? <HiMoon size={28} /> : <CgSun size={28} />
   useEffect(() => {
-    M.Modal.init(searchModal.current);
-  }, []);
-  const linkColor = theme === 'light' ? 'black' : 'white';
-  const bgColor = theme === 'light' ? 'white' : 'black';
-  const bor = theme === 'light' ? '' : '1px groove grey';
+    M.Modal.init(searchModal.current)
+  }, [])
+  const linkColor = theme === 'light' ? 'black' : 'white'
+  const bgColor = theme === 'light' ? 'white' : 'black'
+  const bor = theme === 'light' ? '' : '1px groove grey'
   const renderList = () => {
     if (state) {
       return [
@@ -97,9 +97,9 @@ const Navbar = ({ theme, setTheme }) => {
             <button
               className='btn #c62828 red darken-3'
               onClick={() => {
-                localStorage.clear();
-                dispatch({ type: 'CLEAR' });
-                history.push('/api/signin');
+                localStorage.clear()
+                dispatch({ type: 'CLEAR' })
+                history.push('/api/signin')
               }}
               style={{ marginRight: '10px' }}
             >
@@ -107,7 +107,7 @@ const Navbar = ({ theme, setTheme }) => {
             </button>
           </li>
         </>,
-      ];
+      ]
     } else {
       return [
         <>
@@ -133,11 +133,11 @@ const Navbar = ({ theme, setTheme }) => {
             </Link>
           </li>
         </>,
-      ];
+      ]
     }
-  };
+  }
   const fetchUsers = (query) => {
-    setSearch(query);
+    setSearch(query)
     fetch('/api/search-users', {
       method: 'post',
       headers: {
@@ -147,9 +147,9 @@ const Navbar = ({ theme, setTheme }) => {
     })
       .then((res) => res.json())
       .then((results) => {
-        setUserDetails(results.user);
-      });
-  };
+        setUserDetails(results.user)
+      })
+  }
   return (
     <nav>
       <div
@@ -160,7 +160,7 @@ const Navbar = ({ theme, setTheme }) => {
         }}
       >
         <Link to={state ? '/' : '/api/signin'} className='brand-logo left'>
-          <span style={{ color: linkColor }}>Instagram</span>
+          <span style={{ color: linkColor }}>Pinsta</span>
         </Link>
         <ul id='nav-mobile' className='right'>
           {renderList()}
@@ -191,8 +191,8 @@ const Navbar = ({ theme, setTheme }) => {
                       : '/profile'
                   }
                   onClick={() => {
-                    M.Modal.getInstance(searchModal.current).close();
-                    setSearch('');
+                    M.Modal.getInstance(searchModal.current).close()
+                    setSearch('')
                   }}
                 >
                   <li
@@ -206,7 +206,7 @@ const Navbar = ({ theme, setTheme }) => {
                     {item.name}
                   </li>
                 </Link>
-              );
+              )
             })}
           </ul>
         </div>
@@ -236,7 +236,7 @@ const Navbar = ({ theme, setTheme }) => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

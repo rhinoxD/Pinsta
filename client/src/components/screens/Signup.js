@@ -1,47 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import M from 'materialize-css';
+import React, { useState, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import M from 'materialize-css'
 
 const Signup = ({ theme }) => {
-  const history = useHistory();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [image, setImage] = useState('');
-  const [url, setUrl] = useState(undefined);
-  const linkColor = theme === 'light' ? 'black' : 'white';
-  const bgColor = theme === 'light' ? 'white' : 'black';
-  const bor = theme === 'light' ? '' : '1px groove grey';
+  const history = useHistory()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [image, setImage] = useState('')
+  const [url, setUrl] = useState(undefined)
+  const linkColor = theme === 'light' ? 'black' : 'white'
+  const bgColor = theme === 'light' ? 'white' : 'black'
+  const bor = theme === 'light' ? '' : '1px groove grey'
   useEffect(() => {
     if (url) {
-      uploadFields();
+      uploadFields()
     }
-  }, [url]);
+  }, [url])
   const uploadPic = () => {
-    const data = new FormData();
-    data.append('file', image);
-    data.append('upload_preset', 'insta-clone');
-    data.append('cloud-name', 'dgcs2lm7o');
+    const data = new FormData()
+    data.append('file', image)
+    data.append('upload_preset', 'insta-clone')
+    data.append('cloud-name', 'dgcs2lm7o')
     fetch('https://api.cloudinary.com/v1_1/dgcs2lm7o/image/upload', {
       method: 'post',
       body: data,
     })
       .then((res) => res.json())
       .then((data) => {
-        setUrl(data.secure_url);
+        setUrl(data.secure_url)
       })
       .catch((error) => {
-        console.log(error);
-      });
-  };
+        console.log(error)
+      })
+  }
   const uploadFields = () => {
     if (
       !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
       )
     ) {
-      M.toast({ html: 'Invalid Email', classes: '#c62828 red darken-3' });
-      return;
+      M.toast({ html: 'Invalid Email', classes: '#c62828 red darken-3' })
+      return
     }
     fetch('/api/signup', {
       method: 'post',
@@ -58,30 +58,30 @@ const Signup = ({ theme }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          M.toast({ html: data.error, classes: '#c62828 red darken-3' });
+          M.toast({ html: data.error, classes: '#c62828 red darken-3' })
         } else {
-          M.toast({ html: data.message, classes: '#43a047 green' });
-          history.push('/api/signin');
+          M.toast({ html: data.message, classes: '#43a047 green' })
+          history.push('/api/signin')
         }
       })
       .catch((error) => {
-        console.log(error);
-      });
-  };
+        console.log(error)
+      })
+  }
   const PostData = () => {
     if (image) {
-      uploadPic();
+      uploadPic()
     } else {
-      uploadFields();
+      uploadFields()
     }
-  };
+  }
   return (
     <div className='my-card'>
       <div
         className='card auth-card input-field'
         style={{ backgroundColor: bgColor, border: bor }}
       >
-        <h2 style={{ color: linkColor }}>Instagram</h2>
+        <h2 style={{ color: linkColor }}>Pinsta</h2>
 
         <input
           type='text'
@@ -134,7 +134,7 @@ const Signup = ({ theme }) => {
         </h6>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup

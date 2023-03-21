@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import M from 'materialize-css';
+import React, { useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
+import M from 'materialize-css'
 const NewPassword = () => {
-  const history = useHistory();
-  const [password, setPasword] = useState('');
-  const { token } = useParams();
-  console.log(token);
+  const history = useHistory()
+  const [password, setPasword] = useState('')
+  const { token } = useParams()
+  console.log(token)
   const PostData = () => {
     fetch('/api/new-password', {
       method: 'post',
@@ -19,22 +19,22 @@ const NewPassword = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log(data)
         if (data.error) {
-          M.toast({ html: data.error, classes: '#c62828 red darken-3' });
+          M.toast({ html: data.error, classes: '#c62828 red darken-3' })
         } else {
-          M.toast({ html: data.message, classes: '#43a047 green darken-1' });
-          history.push('/api/signin');
+          M.toast({ html: data.message, classes: '#43a047 green darken-1' })
+          history.push('/api/signin')
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
-  };
+        console.log(err)
+      })
+  }
   return (
     <div className='mycard'>
       <div className='card auth-card input-field'>
-        <h2>Instagram</h2>
+        <h2>Pinsta</h2>
 
         <input
           type='password'
@@ -50,7 +50,7 @@ const NewPassword = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NewPassword;
+export default NewPassword

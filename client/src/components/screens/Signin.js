@@ -1,24 +1,24 @@
-import React, { useState, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { UserContext } from '../../App';
-import M from 'materialize-css';
+import React, { useState, useContext } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { UserContext } from '../../App'
+import M from 'materialize-css'
 
 const Signin = ({ theme }) => {
-  const { state, dispatch } = useContext(UserContext);
-  const history = useHistory();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const linkColor = theme === 'light' ? 'black' : 'white';
-  const bgColor = theme === 'light' ? 'white' : 'black';
-  const bor = theme === 'light' ? '' : '1px groove grey';
+  const { state, dispatch } = useContext(UserContext)
+  const history = useHistory()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const linkColor = theme === 'light' ? 'black' : 'white'
+  const bgColor = theme === 'light' ? 'white' : 'black'
+  const bor = theme === 'light' ? '' : '1px groove grey'
   const PostData = () => {
     if (
       !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
       )
     ) {
-      M.toast({ html: 'Invalid Email', classes: '#c62828 red darken-3' });
-      return;
+      M.toast({ html: 'Invalid Email', classes: '#c62828 red darken-3' })
+      return
     }
     fetch('/api/signin', {
       method: 'post',
@@ -33,26 +33,26 @@ const Signin = ({ theme }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          M.toast({ html: data.error, classes: '#c62828 red darken-3' });
+          M.toast({ html: data.error, classes: '#c62828 red darken-3' })
         } else {
-          localStorage.setItem('jwt', data.token);
-          localStorage.setItem('user', JSON.stringify(data.user));
-          dispatch({ type: 'USER', payload: data.user });
-          M.toast({ html: 'Logged In Successfully', classes: '#43a047 green' });
-          history.push('/');
+          localStorage.setItem('jwt', data.token)
+          localStorage.setItem('user', JSON.stringify(data.user))
+          dispatch({ type: 'USER', payload: data.user })
+          M.toast({ html: 'Logged In Successfully', classes: '#43a047 green' })
+          history.push('/')
         }
       })
       .catch((error) => {
-        console.log(error);
-      });
-  };
+        console.log(error)
+      })
+  }
   return (
     <div className='my-card'>
       <div
         className='card auth-card input-field'
         style={{ backgroundColor: bgColor, border: bor }}
       >
-        <h2 style={{ color: linkColor }}>Instagram</h2>
+        <h2 style={{ color: linkColor }}>Pinsta</h2>
         <input
           type='email'
           placeholder='Email'
@@ -91,7 +91,7 @@ const Signin = ({ theme }) => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Signin;
+export default Signin
